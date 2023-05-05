@@ -12,7 +12,7 @@ export class Login {
   constructor() {
     this.username = cy.get('input[name="identification"]');
     this.password = cy.get('input[name="password"]');
-    this.loginButton = cy.get("#ember12");
+    this.loginButton = cy.get('button[type="submit"]');
   }
 
   when_user_enter_credentials_and_click_on_login = () => {
@@ -32,7 +32,7 @@ export class Login {
   };
 
   then_show_invalid_message_and_show_retry = () => {
-    cy.get("#ember12 > span").then(($span) => {
+    cy.get('button[type="submit"] > span').then(($span) => {
       expect($span[0].innerText).to.equal(retryText);
     });
 
