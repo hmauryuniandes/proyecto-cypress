@@ -19,4 +19,11 @@ export class Site {
       expect($header).not.to.be.undefined
     });
   };
+
+  then_user_is_redirected_to_site_login = () => {
+    cy.wait(2000);
+    cy.window().then((win) => {
+      expect(win.document.location.href).to.include("/ghost/#/signin");
+    });
+  };
 }
