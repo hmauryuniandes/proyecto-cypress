@@ -47,11 +47,21 @@ describe("Testing page creation", () => {
     
   })
 
+  it("Test delete page", ()=>{
+    // WHEN: usuario da click en eliminar pagina
+    _pageObject = new Page();
+    _pageObject.when_user_click_on_delete_page();
+    //THEN: la pagina fue eliminada
+    _pageObject.then_page_was_deleted();
+   
+ })
+
   after(() => {
+    cy.wait(2500)
     _pageObject = new Page();
     menuObject = new Menu();
     
-    menuObject.when_user_navigate_to_pages();
+    //menuObject.when_user_navigate_to_pages();
     _pageObject.delete_all_pages();
 
   });

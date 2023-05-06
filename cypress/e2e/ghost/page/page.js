@@ -60,15 +60,27 @@ export class Page {
           cy.get('a[href="#/pages/"').click();
     };
 
-    when_user_delete_current_post = () => {
-        cy.get("button.post-settings").click();
-        cy.wait(500);
-        cy.get("button.settings-menu-delete-button").click();
-        cy.wait(500);
-        cy.get(".modal-content").within(() => {
-          cy.get("button.gh-btn-red").click();
-        });
-      };
+    when_user_click_on_delete_page = () => {
+        cy.get('[role="menuitem"]').first().then((page) => {
+            cy.wrap(page).trigger('contextmenu') // simulando clic derecho
+            cy.wait(500)
+            cy.contains('button.mr2', 'Delete').click()
+            cy.wait(500)
+            cy.get("button.gh-btn-red").click()
+          })
+    };
+
+    then_page_was_deleted = () =>{
+        cy.get(
+            "aside > article > .gh-notification-content > .gh-notification-title"
+          ).then(($title) => {
+            expect($title[0].innerText).to.equal("Page deleted successfully");
+          });
+
+          //cy.get('a[href="#/pages/"').click();
+          cy.wait(500)
+    };
+
     delete_all_pages = () =>
     {
         cy.get('[role="menuitem"]').each(page => {
