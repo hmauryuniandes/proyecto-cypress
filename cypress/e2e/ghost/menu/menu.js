@@ -6,4 +6,10 @@ export class Menu {
       cy.get('a[href="#/posts/"]').click();
     });
   };
+
+  when_user_navigate_to_pages = () => {
+    cy.get("section.gh-nav-body").within(() => {
+      cy.get('a[href="#/pages/"]').click();
+    });
+  };
 }
