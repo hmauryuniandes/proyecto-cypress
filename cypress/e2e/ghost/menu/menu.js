@@ -24,4 +24,10 @@ export class Menu {
       cy.get('a[href="#/site/"]').click();
     });
   };
+
+  when_user_navigate_to_staff = () => {
+    cy.get("section.gh-nav-body").within(() => {
+      cy.get('a[href="#/staff/"]').click();
+    });
+  };
 }
