@@ -16,12 +16,12 @@ describe('template spec', () => {
 
     // WHEN: usuario navega a la pantalla setting/General
     _menuObject.when_user_navigate_to_general();
-    // AND: usuario da click en el boton expand del titulo y la descripción
+    // AND: usuario da click en el boton subir imagen
     _generalObject.when_user_click_on_upload_image();
     // AND: usuario guarda las configuraciones
     _generalObject.when_user_save_settings();
 
-    // THEN: el post fue publicado
+    // THEN: el icono fue publicado
     _generalObject.then_icon_was_updated();
   });
 })

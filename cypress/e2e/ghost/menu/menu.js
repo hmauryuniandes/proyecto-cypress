@@ -17,7 +17,7 @@ export class Menu {
   }
 
   get siteLink() {
-    return cy.get('li > a[href="#/site/"]');
+    return cy.get('a[href="#/site/"]');
   }
 
   get profileDropdown() {

@@ -9,7 +9,7 @@ export class General {
     return cy.get(".gh-canvas-header > .view-actions > button");
   }
 
-  constructor() {}
+  constructor() { }
 
   when_user_click_on_expand_title_and_description = () => {
     cy.get(".gh-setting-first > .gh-setting-action > button").then(
@@ -28,7 +28,7 @@ export class General {
     cy.get(
       ".gh-setting-content-extended > .form-group.ember-view > .ember-text-field.gh-input.ember-view"
     ).then(($inputs) => {
-      cy.wrap($inputs[0]).clear().type(this.newTitle, {force: true});
+      cy.wrap($inputs[0]).clear().type(this.newTitle, { force: true });
     });
 
     cy.window().then((win) => {
@@ -39,7 +39,7 @@ export class General {
     cy.get(
       ".gh-setting-content-extended > .form-group.ember-view > .ember-text-field.gh-input.ember-view"
     ).then(($inputs) => {
-      cy.wrap($inputs[1]).clear().type(this.newDescription, {force: true});
+      cy.wrap($inputs[1]).clear().type(this.newDescription, { force: true });
     });
     cy.wait(500);
   };
@@ -48,20 +48,20 @@ export class General {
     cy.get(
       ".gh-setting-content-extended > .form-group.ember-view > .ember-text-field.gh-input.ember-view"
     ).then(($inputs) => {
-      cy.wrap($inputs[0]).clear().type(this.oldTitle, {force: true});
+      cy.wrap($inputs[0]).clear().type(this.oldTitle, { force: true });
     });
 
     cy.get(
       ".gh-setting-content-extended > .form-group.ember-view > .ember-text-field.gh-input.ember-view"
     ).then(($inputs) => {
-      cy.wrap($inputs[1]).clear().type(this.oldDescription, {force: true});
+      cy.wrap($inputs[1]).clear().type(this.oldDescription, { force: true });
     });
     cy.wait(500);
   };
 
   when_user_save_settings = () => {
     this.saveButton.click();
-    cy.wait(100);
+    cy.wait(1000);
   };
 
   then_title_was_updated = () => {
@@ -71,15 +71,17 @@ export class General {
     });
   };
 
-  then_icon_was_updated = () => {
-    cy.wait(1000);
-    // TODO: validar que el logo en el menu tenga en los estilos el nombre del archivo
-  };
-
   when_user_click_on_upload_image = () => {
     cy.get('.gh-setting-first > .gh-setting-action > div > span > input[type="file"]')
-    .selectFile('cypress/fixtures/kraken-icon.png', {force: true});
+      .selectFile('cypress/fixtures/kraken-icon.png', { force: true });
     cy.wait(2000);
+  };
+
+  then_icon_was_updated = () => {
+    cy.wait(1000);
+    cy.get('.gh-nav-menu-icon').invoke('attr', 'style').then((style) => {
+      expect(style).to.include('kraken-icon');
+    });
   };
 
   when_user_save_settings = () => {
@@ -87,10 +89,28 @@ export class General {
     cy.wait(1000);
   };
 
-
   then_title_was_updated = () => {
     cy.get('.view-actions > .gh-btn.gh-btn-blue.gh-btn-icon.ember-view > span').then(($title) => {
       expect($title[0].innerText).to.equal("Saved");
     });
   };
+
+  when_user_click_on_delete_logo = () => {
+    cy.get('.gh-setting > .gh-setting-action.gh-setting-action-smallimg > button').click();
+    cy.wait(500);
+  };
+
+  when_user_click_on_upload_image_background = () => {
+    cy.get('.gh-setting-last > .gh-setting-action > div > span > input[type="file"]')
+      .selectFile('cypress/fixtures/fondo.jpg', { force: true });
+    cy.wait(2000);
+  };
+
+  then_imagen_background_was_updated = () => {
+    cy.wait(2000);
+    cy.get('.site-home-header style').invoke('text').then((style) => {
+      expect(style).to.include('fondo');
+    });
+  };
+
 }
