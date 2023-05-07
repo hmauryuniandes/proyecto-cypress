@@ -4,6 +4,22 @@ export class Menu {
     return cy.get('li > a[href="#/posts/"]');
   } 
 
+  get generalLink() {
+    return cy.get('li > a[href="#/settings/general/"]');
+  }
+
+  get codeInjectionLink() {
+    return cy.get('li > a[href="#/settings/code-injection/"]');
+  }
+
+  get staffLink() {
+    return cy.get('li > a[href="#/staff/"]');
+  }
+
+  get siteLink() {
+    return cy.get('li > a[href="#/site/"]');
+  }
+
   get profileDropdown() {
     return cy.get('.gh-nav-bottom > div.pointer');
   } 
@@ -27,26 +43,18 @@ export class Menu {
   };
 
   when_user_navigate_to_general = () => {
-    cy.get("section.gh-nav-body").within(() => {
-      cy.get('a[href="#/settings/general/"]').click();
-    });
+    this.generalLink.click();
   };
 
   when_user_navigate_to_code_injection = () => {
-    cy.get("section.gh-nav-body").within(() => {
-      cy.get('a[href="#/settings/code-injection/"]').click();
-    });
+    this.codeInjectionLink.click();
   };
 
   when_user_navigate_to_site = () => {
-    cy.get("section.gh-nav-body").within(() => {
-      cy.get('a[href="#/site/"]').click();
-    });
+    this.siteLink.click();
   };
 
   when_user_navigate_to_staff = () => {
-    cy.get("section.gh-nav-body").within(() => {
-      cy.get('a[href="#/staff/"]').click();
-    });
+    this.staffLink.click();
   };
 }
