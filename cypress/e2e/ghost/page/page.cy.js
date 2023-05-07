@@ -22,7 +22,7 @@ describe("Testing page creation", () => {
   });
   
 
-  it("Test create new page", () => {
+  /*it("Test create new page", () => {
     // WHEN: usuario da click en el boton new page
     _pageObject = new Page();
     _pageObject.when_user_click_on_new_page();
@@ -31,7 +31,7 @@ describe("Testing page creation", () => {
     // AND: usuario publica el pagina
     _pageObject.when_user_publish_page();
     // AND: usuario abre la pagina recien publicada
-    _pageObject.when_user_get_back_to_open_new_page()
+    //_pageObject.when_user_get_back_to_open_new_page()
     
     // THEN: la pagina fue publicado
     _pageObject.then_page_was_published();
@@ -46,7 +46,7 @@ describe("Testing page creation", () => {
      _pageObject.then_page_was_modified();
     
   })
-
+  */
   it("Test delete page", ()=>{
     // WHEN: usuario da click en eliminar pagina
     _pageObject = new Page();

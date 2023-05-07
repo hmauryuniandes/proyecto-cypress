@@ -1,3 +1,5 @@
+let pagesCountBeforeDeletion=0;
+let pagesCountAfterDeletion=0;
 export class Page {
     constructor() {}
   
@@ -6,7 +8,7 @@ export class Page {
     };
   
     when_user_type_title_and_content = () => {
-      cy.get('textarea[placeholder="Page title"]').type("Nueva Pagina");
+      cy.get('textarea[placeholder="Page Title"]').type("Nueva Pagina");
       cy.get('.koenig-editor__editor')
         .find('p[data-koenig-dnd-droppable="true"]')
         .invoke('html', 'Esta es mi primera pagina')
@@ -14,12 +16,11 @@ export class Page {
     };
   
     when_user_publish_page = () => {
-      cy.get('button.gh-publish-trigger').click()
+      cy.get('div.gh-publishmenu-trigger').click()
       cy.wait(100);
-      cy.get('button.gh-btn-large').click()
-      cy.wait(500);
-      cy.get('button.gh-btn-pulse').click()
-      cy.wait(500);
+      cy.get('button.gh-publishmenu-button').click()
+      cy.wait(2500);
+      
     };
 
     when_user_get_back_to_open_new_page = () => {
@@ -31,23 +32,26 @@ export class Page {
       };
   
     then_page_was_published = () => {
-        cy.get('[data-test-editor-post-status]')
-        .then(($span) => {
-          const text = $span.text().trim()
-          console.log(text)
-          expect(text).to.equal('Published')
-
+        cy.get('div.flex > span > div')
+        .invoke('text')
+        .then((text) => {
+            console.log(text.trim());
+            expect(text.trim()).to.equal('Published');
+        
           cy.get('a[href="#/pages/"').click();
         })
     };
   
     
     when_user_click_on_edit_page = () =>{
-        cy.get("body > div.gh-app > div > main > section > section > div.gh-list-sticky > div.posts-list.gh-list.feature-memberAttribution > div:nth-child(1)").click();
+        cy.get('a[title="Edit this page"]:eq(0)').click();
         cy.wait(100)
-        cy.get('textarea[placeholder="Page title"]').type(" Modificada");
+        cy.get('textarea[placeholder="Page Title"]').type(" Modificada");
         cy.wait(500)
-        cy.get("button.gh-editor-save-trigger").click();
+        cy.get("div.gh-publishmenu-trigger").click();
+        cy.wait(500)
+        cy.get('button.gh-publishmenu-button').click()
+        cy.wait(2500);
     };
 
     then_page_was_modified = () =>{
@@ -59,41 +63,46 @@ export class Page {
 
           cy.get('a[href="#/pages/"').click();
     };
-
+    
     when_user_click_on_delete_page = () => {
-        cy.get('[role="menuitem"]').first().then((page) => {
-            cy.wrap(page).trigger('contextmenu') // simulando clic derecho
-            cy.wait(500)
-            cy.contains('button.mr2', 'Delete').click()
-            cy.wait(500)
-            cy.get("button.gh-btn-red").click()
-          })
+        cy.get('a[title="Edit this page"]').then(($before) => {
+            pagesCountBeforeDeletion = $before.length;
+            console.log("before: ",pagesCountBeforeDeletion)
+        })
+        cy.get('a[title="Edit this page"]:eq(0)').click();
+        cy.wait(100)
+          cy.get('button.post-settings').click();
+          cy.wait(500)
+          cy.get('button.settings-menu-delete-button').click();
+          cy.wait(2500)
+          cy.get('button.gh-btn-red').click();
+          cy.wait(2500)
+          
     };
 
     then_page_was_deleted = () =>{
-        cy.get(
-            "aside > article > .gh-notification-content > .gh-notification-title"
-          ).then(($title) => {
-            expect($title[0].innerText).to.equal("Page deleted successfully");
-          });
+        cy.get('a[title="Edit this page"]').then(($after) => {
+            pagesCountAfterDeletion = $after.length;
+            console.log("after: ",pagesCountAfterDeletion)
+            expect(parseInt(pagesCountAfterDeletion)).to.be.lessThan(parseInt(pagesCountBeforeDeletion));
+        })
 
-          //cy.get('a[href="#/pages/"').click();
-          cy.wait(500)
+
     };
 
     delete_all_pages = () =>
     {
-        cy.get('[role="menuitem"]').each(page => {
-            const pageTitle = page.find('h3').text()
-            console.log(pageTitle)
-            if (pageTitle.includes('Nueva Pagina')) {
-                console.log("eliminando...")
-              cy.wrap(page).trigger('contextmenu')
-              cy.wait(500)
-              cy.contains('button.mr2', 'Delete').click()
-              cy.wait(500)
-              cy.get("button.gh-btn-red").click();
-            }
+        cy.get('a[title="Edit this page"]').each(page => {
+        
+                cy.get('a[title="Edit this page"]:eq(0)').click();
+                cy.wait(100)
+                  cy.get('button.post-settings').click();
+                  cy.wait(500)
+                  cy.get('button.settings-menu-delete-button').click();
+                  cy.wait(2500)
+                  cy.get('button.gh-btn-red').click();
+                  cy.wait(2500)
+            
           })
     }
   }
