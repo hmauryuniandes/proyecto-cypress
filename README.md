@@ -16,8 +16,8 @@
     - Eliminar post (login exitoso, navegar menu, Crear post)
    
 ## Page (Santiago) 
-    - Crear Page (login exitoso, navegar menu)
-    - Editar Page (login exitoso, navegar menu, Crear Page)
+    - Crear Page (login exitoso, navegar menu, crear pagina)
+    - Editar Page (login exitoso, navegar menu, Seleccionar primera pagina,)
     - Eliminar Page (login exitoso, navegar menu, Crear Page)
 
 ## Tag (Monica)

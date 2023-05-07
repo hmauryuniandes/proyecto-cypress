@@ -1,5 +1,6 @@
 let pagesCountBeforeDeletion=0;
 let pagesCountAfterDeletion=0;
+let url;
 export class Page {
     constructor() {}
   
@@ -54,6 +55,20 @@ export class Page {
         cy.wait(2500);
     };
 
+    when_user_get_page_link = () =>{
+        
+        cy.get('button.post-settings').click();
+        cy.wait(500)
+        url = cy.get('input[name="post-setting-slug"]').invoke('val');
+        console.log(url)
+        cy.get('button[aria-label="Close"]').click();
+        cy.wait(100)
+        cy.get('a[href="#/pages/"').click();
+        cy.wait(200)
+        
+        return url
+    };
+
     then_page_was_modified = () =>{
         cy.get(
             "aside > article > .gh-notification-content > .gh-notification-title"
@@ -92,7 +107,7 @@ export class Page {
 
     delete_all_pages = () =>
     {
-        cy.get('a[title="Edit this page"]').each(page => {
+        cy.get('a[title="Edit this page"]').not(':last').each(page => {
         
                 cy.get('a[title="Edit this page"]:eq(0)').click();
                 cy.wait(100)
