@@ -5,12 +5,13 @@ import { Post } from "./post";
 
 
 describe("Testing post creation", () => {
-  let _siteObject = new Site("http://localhost:2368/ghost/#/signin");
+  let _siteObject = new Site();
   let _loginObject = new Login();
   let _postObject = new Post();
   let menuObject = new Menu();
 
   afterEach(() => {
+    _postObject.when_user_click_on_lastest_post();
     _postObject.when_user_delete_current_post();
   });
 

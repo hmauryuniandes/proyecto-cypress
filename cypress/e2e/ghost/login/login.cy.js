@@ -1,12 +1,9 @@
 import { Site } from "../site/site";
 import { Login } from "./login";
 
-const _url = "http://localhost:2368/ghost/#/signin";
-
 describe("Testing Ghost authentication", () => {
-  let _siteObject = new Site(_url);
+  let _siteObject = new Site();
   let _loginObject = new Login();
-
 
   it("test successful login", () => {
     // GIVEN: usuario que ingreso al enlace del sitio de ghost

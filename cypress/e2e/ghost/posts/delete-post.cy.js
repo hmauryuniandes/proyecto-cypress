@@ -5,7 +5,7 @@ import { Post } from "./post";
 
 
 describe("Testing post creation", () => {
-  let _siteObject = new Site("http://localhost:2368/ghost/#/signin");
+  let _siteObject = new Site();
   let _loginObject = new Login();
   let _postObject = new Post();
   let menuObject = new Menu();
