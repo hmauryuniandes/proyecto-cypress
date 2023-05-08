@@ -88,9 +88,11 @@ export class PageTag {
         expect($title[0].innerText).to.equal("Updated");
       });
   
+      cy.wait(3000);
       cy.get("div.gh-publishmenu-trigger").then(($action) => {
         expect($action[0].innerText.trim()).to.equal("Update");
       });
+      cy.wait(2000);
     };
   
     then_latest_post_was_edited = () => {

@@ -32,6 +32,10 @@ export class Menu {
     return cy.get('li > a[href="#/tags/"]');
   } 
 
+  get pageLink() {
+    return cy.get('li > a[href="#/pages/"]');
+  }
+
   constructor() {}
 
   when_user_navigate_to_posts = () => {
@@ -67,8 +71,6 @@ export class Menu {
   };
 
   when_user_navigate_to_pages = () => {
-    cy.get("section.gh-nav-body").within(() => {
-      cy.get('a[href="#/pages/"]').click();
-    });
+    this.pageLink.click();
   };
 }

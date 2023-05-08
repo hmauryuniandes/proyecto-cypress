@@ -1,16 +1,18 @@
-export class Site {
-  url;
 
-  constructor(url) {
-    this.url = url;
+const _url = "http://localhost:2368/ghost/#/signin";
+
+export class Site {
+
+  constructor() {
   }
 
   given_user_visit_ghost = () => {
-    cy.visit(this.url);
+    cy.visit(_url);
     cy.wait(2000);
   }
   
   then_user_is_redirected_to_site_portal = () => {
+    cy.wait(2000);
     cy.window().then((win) => {
       expect(win.document.location.href).to.include("/ghost/#/site");
     });

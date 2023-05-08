@@ -1,6 +1,6 @@
-const username = "ma.munozb1@uniandes.edu.co";
+const username = "hmaury1@gmail.com";
 const invalidUsername = "xxx@xxx.com";
-const password = "R@fael2016.";
+const password = "Hola123456*#";
 const invalidPassword = "123";
 const retryText = "Retry";
 
@@ -20,8 +20,8 @@ export class Login {
   }
 
   when_user_enter_credentials_and_click_on_login = () => {
-    this.username.type(username);
-    this.password.type(password);
+    this.username.clear().type(username);
+    this.password.clear().type(password);
     this.loginButton.click();
     cy.wait(5000);
   };
