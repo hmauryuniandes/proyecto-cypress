@@ -5,18 +5,7 @@ describe("Testing Ghost authentication", () => {
   let _siteObject = new Site();
   let _loginObject = new Login();
 
-  it("test successful login", () => {
-    // GIVEN: usuario que ingreso al enlace del sitio de ghost
-    _siteObject.given_user_visit_ghost();
-
-    // WHEN: usuario ingresa credenciales y da click en el boton login
-    _loginObject.when_user_enter_credentials_and_click_on_login();
-
-    // THEN: usuario es redireccionado al panel del sitio y se muestra el titulo del sitio
-    _siteObject.then_user_is_redirected_to_site_portal();
-  });
-
-  it("test invalid login", () => {
+  it("test invalid login and valid login", () => {
     // GIVEN: usuario que ingreso al enlace del sitio de ghost
     _siteObject.given_user_visit_ghost();
     
@@ -25,5 +14,11 @@ describe("Testing Ghost authentication", () => {
     
     // THEN: usuario es redireccionado al panel del sitio y se muestra el titulo del sitio
     _loginObject.then_show_invalid_message_and_show_retry();
+
+    // WHEN: usuario ingresa credenciales y da click en el boton login
+    _loginObject.when_user_enter_credentials_and_click_on_login();
+
+    // THEN: usuario es redireccionado al panel del sitio y se muestra el titulo del sitio
+    _siteObject.then_user_is_redirected_to_site_portal();
   });
 });

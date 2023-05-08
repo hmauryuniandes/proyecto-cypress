@@ -28,6 +28,14 @@ export class Menu {
     return cy.get('a[href="#/signout/"]');
   } 
 
+  get tagLink() {
+    return cy.get('li > a[href="#/tags/"]');
+  } 
+
+  get pageLink() {
+    return cy.get('li > a[href="#/pages/"]');
+  }
+
   constructor() {}
 
   when_user_navigate_to_posts = () => {
@@ -56,5 +64,13 @@ export class Menu {
 
   when_user_navigate_to_staff = () => {
     this.staffLink.click();
+  };
+
+  when_user_navigate_to_tags = () => {
+    this.tagLink.click();
+  };
+
+  when_user_navigate_to_pages = () => {
+    this.pageLink.click();
   };
 }
