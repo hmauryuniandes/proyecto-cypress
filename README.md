@@ -16,9 +16,9 @@
     - Eliminar post (login exitoso, navegar menu, Crear post)
    
 ## Page (Santiago) 
-    - Crear Page (login exitoso, navegar menu, crear pagina)
-    - Editar Page (login exitoso, navegar menu, Seleccionar primera pagina,)
-    - Eliminar Page (login exitoso, navegar menu, Crear Page)
+    - Crear Page (login exitoso, navegar menu, crear pagina, escribir titulo y contenido, publicar la pagina)
+    - Editar Page (login exitoso, navegar menu, Seleccionar primera pagina, cambiar titulo, guardar pagina)
+    - Eliminar Page (login exitoso, navegar menu, Seleccionar primera pagina, eliminar pagina)
 
 ## Tag (Monica)
     - Crar un tag (login exitoso, navegar menu)
@@ -44,6 +44,5 @@
     - Editar profile, cambia password (login exitoso, editar password, login exitoso, restaurar password original) (Monica)
 
 # Configuracion/Diseño 
-    - Configurar un nuevo elemento de menu con una pagina nueva (login exitoso, navegar menu, Crear Page, volver panel, view side) (Santiago)
-    - Configurar un nuevo elemento de menu con un post nuevo (login exitoso, navegar menu, Crear post, volver panel, view side) (Santiago)
-    - Configurar un nuevo elemento de menu secundario con una pagina nueva (login exitoso, navegar menu, Crear Page, volver panel, view side) (Monica)
+    - Configurar un nuevo elemento de menu con una pagina nueva (login exitoso, navegar menu, Crear Page, volver panel, view side, crear pagina en menu de navegacion principal) (Santiago)
+    - Configurar un nuevo elemento de menu secundario con una pagina nueva (login exitoso, navegar menu, Crear Page, volver panel, view side,crear pagina en menu de navegacion principal) (Santiago)
