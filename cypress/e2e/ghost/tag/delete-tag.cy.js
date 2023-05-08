@@ -4,7 +4,7 @@ import { Site } from "../site/site";
 import { Tag } from "./tag";
 
 
-describe("Testing tag creation", () => {
+describe("Testing delete tag", () => {
   let _siteObject = new Site("http://localhost:2368/ghost/#/signin");
   let _loginObject = new Login();
   let _tagObject = new Tag();
@@ -12,7 +12,7 @@ describe("Testing tag creation", () => {
   let edslut = '';
   const Tag4 = "Cypress tag ghost 4";
   
-  it("Test create new tag", () => {
+  it("Test delete tag", () => {
     // GIVEN: usuario autenticado
     _siteObject.given_user_visit_ghost();
     _loginObject.when_user_enter_credentials_and_click_on_login();

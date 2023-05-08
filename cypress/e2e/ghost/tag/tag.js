@@ -19,6 +19,14 @@ export class Tag {
     get deleteConfirmationButton() {
       return cy.get(".modal-content > .modal-footer > button.gh-btn-red");
     }
+    get tagAssign(){
+      return cy.get('input[type=Search]');
+    }
+
+    get closeSettings() {
+      return cy.contains('button > span', 'close').focus()
+      //return cy.get('button').find('span').contains('Close');
+    }
     
     constructor() { 
       this.slug;
@@ -79,5 +87,29 @@ export class Tag {
       cy.get('.tags-list > li.gh-tags-list-item')
       .find(`a[href="#/tags/${slugSel}/"]`)
       .should('not.exist');
+    };
+
+    when_user_assign_tag_post = (nameTag) => {
+      this.settingButton.click();
+      cy.wait(500);      
+      cy.get('#tag-input > ul > input[type=Search]')
+      .click()  
+      .type(`${nameTag}`) 
+      .type('{enter}');
+      cy.get('#tag-input') // Hace click en el div padre para cerrar la lista desplegable
+      .click();
+      cy.contains('button', 'Close').focus().click();
+    };
+
+    then_latest_post_was_edited = (post) => {
+      cy.get('.posts-list > li.gh-posts-list-item > a > h3').then(titles => {
+        expect(titles[0].innerText).to.equal(post);
+      });
+    };
+
+    then_latest_page_was_edited = (page) => {
+      cy.get('.gh-list > li.gh-posts-list-item > a > h3').then(titles => {
+        expect(titles[0].innerText).to.equal(page);
+      });
     };
   }

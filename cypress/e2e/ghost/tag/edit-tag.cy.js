@@ -3,7 +3,7 @@ import { Menu } from "../menu/menu";
 import { Site } from "../site/site";
 import { Tag } from "./tag";
 
-describe("Testing tag creation", () => {
+describe("Testing edit tag", () => {
   let _siteObject = new Site("http://localhost:2368/ghost/#/signin");
   let _loginObject = new Login();
   let _tagObject = new Tag();
@@ -12,7 +12,7 @@ describe("Testing tag creation", () => {
   const Tag2 = "Cypress tag ghost 2";
   const Tag3 = "Cypress tag ghost 3";
 
-  it("Test create new tag", () => {
+  it("Test edit tag", () => {
     // GIVEN: usuario autenticado
     _siteObject.given_user_visit_ghost();
     _loginObject.when_user_enter_credentials_and_click_on_login();
