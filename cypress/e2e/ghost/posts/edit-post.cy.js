@@ -11,6 +11,7 @@ describe("Testing post creation", () => {
   let menuObject = new Menu();
 
   afterEach(() => {
+    _postObject.when_user_click_on_lastest_post();
     _postObject.when_user_delete_current_post();
   });
 
@@ -18,8 +19,7 @@ describe("Testing post creation", () => {
     // GIVEN: usuario autenticado
     _siteObject.given_user_visit_ghost();
     _loginObject.when_user_enter_credentials_and_click_on_login();
-
-    // WHEN: usuario navega a la pantalla posts
+    // AND: usuario navega a la pantalla posts
     menuObject.when_user_navigate_to_posts();
     // AND: usuario da click en el boton new post
     _postObject.when_user_click_on_new_post();
@@ -28,7 +28,20 @@ describe("Testing post creation", () => {
     // AND: usuario publica el post
     _postObject.when_user_publish_post();
 
-    // THEN: el post fue publicado
-    _postObject.then_post_was_published();
+    // WHEN: usuario navega al listado de posts
+    _postObject.when_user_click_on_go_back_to_posts();
+    // AND: click en el primer post de la lista, ultimo creado
+    _postObject.when_user_click_on_lastest_post();
+    // AND: Modifica el titulo
+    _postObject.when_user_update_title_and_content();
+    // AND: guarda los cambios
+    _postObject.when_user_publish_post();
+
+    // THEN: el post fue editado
+    _postObject.then_post_was_Edited();
+    // AND: go back
+    _postObject.when_user_click_on_go_back_to_posts();
+    // AND: latest posts was edited:
+    _postObject.then_latest_post_was_edited();
   });
 });

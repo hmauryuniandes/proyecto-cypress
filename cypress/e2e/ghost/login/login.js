@@ -5,34 +5,36 @@ const invalidPassword = "123";
 const retryText = "Retry";
 
 export class Login {
-  username;
-  password;
-  loginButton;
+  get username() {
+    return cy.get('input[name="identification"]');
+  }
+  get password() {
+    return cy.get('input[name="password"]');
+  }
+  get loginButton() {
+    return cy.get("button.login");
+  }
 
   constructor() {
-    this.username = cy.get('input[name="identification"]');
-    this.password = cy.get('input[name="password"]');
-    this.loginButton = cy.get('button[type="submit"]');
+   
   }
 
   when_user_enter_credentials_and_click_on_login = () => {
-    this.username.type(username);
-    this.password.type(password);
+    this.username.clear().type(username);
+    this.password.clear().type(password);
+    this.loginButton.click();
+    cy.wait(5000);
+  };
+
+  when_user_enter_invalid_credentials_and_click_on_login = () => {
+    this.username.type(invalidUsername);
+    this.password.type(invalidPassword);
     this.loginButton.click();
     cy.wait(1000);
   };
 
-  when_user_enter_invalid_credentials_and_click_on_login = () => {
-    cy.get("#login").within(() => {
-        this.username.type(invalidUsername);
-        this.password.type(invalidPassword);
-        this.loginButton.click();
-    });
-    cy.wait(1000);
-  };
-
   then_show_invalid_message_and_show_retry = () => {
-    cy.get('button[type="submit"] > span').then(($span) => {
+    cy.get("button.login > span").then(($span) => {
       expect($span[0].innerText).to.equal(retryText);
     });
 
