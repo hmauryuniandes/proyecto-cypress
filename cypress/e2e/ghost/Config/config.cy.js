@@ -26,9 +26,8 @@ describe("Testion new menus", () => {
     _pageObject.when_user_type_title_and_content();
     _pageObject.when_user_publish_page();
   });
-  
 
-  it("Create new page menu", () => {
+  it("Create new page menu en la navegacion principal", () => {
     menuObject = new Menu();
     _pageObject = new Page();
     _configObject = new Config();
@@ -37,7 +36,21 @@ describe("Testion new menus", () => {
     let url =_pageObject.when_user_get_page_link();
     
     menuObject.when_user_navigate_to_config();
-    _configObject.when_user_create_new_menu();
+    _configObject.when_user_create_new_menu_on_primary_navigation();
+    //menuObject.when_user_navigate_to_view_site();
+    _configObject.then_the_menu_was_created();
+  });
+
+  it("Create new page menu en la navegacion secundaria", () => {
+    menuObject = new Menu();
+    _pageObject = new Page();
+    _configObject = new Config();
+      
+    // WHEN: usuario obtiene el link de la pagina
+    let url =_pageObject.when_user_get_page_link();
+    
+    menuObject.when_user_navigate_to_config();
+    _configObject.when_user_create_new_menu_onsecondary_navigation();
     //menuObject.when_user_navigate_to_view_site();
     _configObject.then_the_menu_was_created();
   });
