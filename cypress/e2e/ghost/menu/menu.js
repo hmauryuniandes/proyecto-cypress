@@ -28,6 +28,10 @@ export class Menu {
     return cy.get('a[href="#/signout/"]');
   } 
 
+  get profileButton() {
+    return cy.get('.dropdown-menu.dropdown-triangle-top > li:nth-of-type(4) > a');
+  } 
+
   get tagLink() {
     return cy.get('li > a[href="#/tags/"]');
   } 
@@ -48,6 +52,10 @@ export class Menu {
 
   when_user_logout = () => {
     this.logoutButton.click();
+  };
+
+  when_user_click_profile = () => {
+    this.profileButton.click();
   };
 
   when_user_navigate_to_general = () => {

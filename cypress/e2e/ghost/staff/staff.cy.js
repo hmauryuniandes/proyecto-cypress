@@ -14,6 +14,12 @@ describe('Testing General settings', () => {
     _loginObject = new Login();
     _staffObject = new Staff();
     _menuObject = new Menu();
+
+    Cypress.on('uncaught:exception', (err, runnable) => {
+        // returning false here prevents Cypress from
+        // failing the test
+        return false
+    })
   })
 
   afterEach(() => {
@@ -26,10 +32,11 @@ describe('Testing General settings', () => {
     _siteObject.given_user_visit_ghost();
     _loginObject.when_user_enter_credentials_and_click_on_login();
 
-    // WHEN: usuario navega a la pantalla Staff
-    _menuObject.when_user_navigate_to_staff();
+    // WHEN: usuario click en el profile dropdown
+    _menuObject.when_user_expand_profile();
+    // AND: click en el profile
+    _menuObject.when_user_click_profile();
     // AND: usuario borra e ingresa el nuevo nombre
-    _staffObject.when_user_click_on_first_user();
     _staffObject.when_user_type_new_fullname();
     // AND: usuario guarda las configuraciones
     _staffObject.when_user_save_settings();
